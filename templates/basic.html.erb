@@ -1,0 +1,97 @@
+<%
+require 'cgi'
+
+ICON_GOOGLE_MAPS =  <<BASE64.gsub(/\s+/, '')
+iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxj
+wv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAATYSURBVGhD7ZZvbBNlHMdrjLzipe/ghYEEdYkaaT
+sUu3ZuEEVUZlhLIsOI4Y8GFaIuEtGpaNhERBMX7CKBLHSbTgkFIoZ0LUNZtnYtpdq1ReafwrqxP66
+UjaGj5Of9zufK3fW569PZFhL7TT5Zd89zfT7f6z3Xaor5PydYUjIrYtRbwkZ9W8ioj3B/JxHyuhXH
+cA6ZfmslbNJWc6L9YZMeVDHqz4XLdSvJaTc/YDbfzol/TJVVAc/Bc8nb3LyETLpdNEEWuBI7ydtkT
+km7edacJsvOOVZLbG7TKsgFz769nCqWDX2m0iqiqJ65Vks9TWKm3LXHAq7li6lS2YD7xqvV3kE0lc
+Nd+UG5hKFtM9hCHTA0+Sdcu56E2MQY//9DrS9L5tFY/Zb61fcYtGDX38+Dr2lzBCKmUjPRVI5cYM2
+xepicvgq0XJgYhfl7ayTz5ex57lGqDHKEk95693yoXTCPB1/jMdpchNtHNqKpHPHii9tegalrf/Gy
+fyQuwuudVnjmcB28cdIKZ0b6YdnBrRJZGo6n6LeP+xGtRF5cwmNYSD0nbNKdJZrKES/eGnam5O/Z9
+7xEjBXfklKKiJ67Ze5LkxfAMdo53CdwmWgqR7z4xSvjfAG88sKx6iPvww53i4SNjt2pcTmBipwWmC
+KayhEvjhsWs8L+TupYo9/OHxPHPRROjctxPkm/hXDDZnsLcU+iCNFUjnhxfOpgxJ/AuuO7+CcQ8sv
+4BX7cEfWlxuXsfqGCKoPQNvHRUrVNrLcSTeWIFxf2QDQxDPfuXysRe6B5PYxcifPjDe42yZiY8oYq
+qowAXm18hB7mbptexc37L31G3YNEUznixfEpJDxCz18ehtqTTVDF3U6vdX4B/fEYfxzHFx7YKJGW0
+24uowplhVHXQRTVI1+85tgOmJie4mXl+Ts5DS86PpXMlzPvy1Xwo70CIpX0zcxCyKi7GjLoFxBF9d
+AkFrVsggMhBwxwX1wojV9gh86dgscPvpk2VwzKn+haChAug7HPHqbKsaGrJXqZQxOZCWJ5nr4yOP/
+SIoqcOtzV/x40mtuIXubQZLIlTZ6Q9Bjg7Ar2H3ahp5dwv3+0dxI1ttCEskFJHrkUXA/+r5ohVJ55
+P+Cc01/buIufZWhSrGSS93q7oNfrhsD2bVRpMT99WMfPJVrsoYmxoCafEMkj3p4u6Kt+giqO4Fhvz
+6nCFVCTn/51MwwORsHr86QKIH7bPqo8crqlOTWPaLGHJqhGJvn4+AjE43GIDcbSSgQ3rEmTx2PiOU
+SLPTRJJVjlBeQl/M170wr4bfsLU0BN3uPaAp3+UYk8tYSnG0Irb+wFfI3H8l5ATd7t3AKVdWNQ+W4
+CXP5LGUsEGranCgQ++kAin5cCLPLGbQkelhI++7epAr6jh/JbIBt55hKcZOgxI4SXGdPkc1pgJvIC
+mUoE163mqMlfgf8iL6BW4rfPP4FA/Xv5KZALeQHWjZ2zArmUF8i2BNFiTz7lBdRLDEhKEC325FteQ
+LVE7EYJosWeQsgLqJUYICWIFnsKJS+gVuL3gWj2BYYDpuuFkhdQKtE/FE0SLfZ898PSbrF8j/PVvM
+oLYAmnf1xS4JufXd1Eiz2NJ0yzscRIwJTsdm0qiLwAlug4M8pfeZRvDLbPJlrFFFNMMbdUNJp/AAA
+NFzA9z3URAAAAAElFTkSuQmCC
+BASE64
+%><!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link href="http://cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <title><%= title %></title>
+    <style>
+      .google-map {
+        background-image: url(data:image/png;base64,<%= ICON_GOOGLE_MAPS %>);
+        background-size: cover;
+        display: block;
+        width: 24px;
+        height: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- example content -->
+    <div class="mui-container">
+      <h1><%= title %></h1>
+
+      <div class="mui-panel">
+        <h2>Search Paths</h2>
+        <ul>
+<%        search_paths.each do |path| %>
+            <li><code><%= path %></code></li>
+<%        end %>
+        </ul>
+      </div>
+
+      <div class="mui-panel">
+        <h2>Results</h2>
+
+        <table class="mui-table">
+          <thead>
+            <tr>
+              <th>Path</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th>Map</th>
+            </tr>
+          </thead>
+          <tbody>
+<%          files.each do |item| %>
+              <tr>
+                <td>
+                  <a href="<%= item[:path] %>"><code><%= item[:path] %></code></a>
+                </td>
+                <td><%= item[:lat] %></td>
+                <td><%= item[:lon] %></td>
+                <td>
+<%              if item[:lat] && item[:lon] %>
+                  <a class="google-map" href="https://www.google.com/maps?q=<%= CGI::escape item[:lat].to_s %>, <%= CGI::escape item[:lon].to_s  %>">
+                  </a>
+<%              end %>
+                </td>
+              </tr>
+<%          end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+

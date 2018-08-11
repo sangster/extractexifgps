@@ -14,9 +14,64 @@ gem install extractexifgps
 ```sh
 extractexifgps > images_in_current_directory.csv
 extractexifgps /some/directory/ > images_in_some_directory.csv
+
+# CSV format
+extractexifgps csv ./
+extractexifgps -C ./ # short alias
+extractexifgps csv -r ./ # file images recursively
+extractexifgps csv -o /path/to/output.csv ./ # write directly to a file
+
+# HTML format
+extractexifgps html ./
+extractexifgps -H ./ # short alias
+extractexifgps html -r ./ # file images recursively
+extractexifgps html -o /path/to/output.html ./ # write directly to a file
+extractexifgps html -t /path/to/template.erb ./ # use a custom ERB template
 ```
 
-## Contributing to ExtractExifGps
+### HTML Templates
+
+`extractexifgps` comes with a default template to generate a decent-looking
+HTML table, but you can supply your own
+[ERB](https://ruby-doc.org/stdlib-2.5.1/libdoc/erb/rdoc/ERB.html) template to
+generate any kind of HTML file you like. See the built-in
+[templates/basic.html.erb](templates/basic.html.erb) as an example template.
+
+
+### Command-line Help
+
+You can get information about the command-line interface in general, or for
+specific commands:
+
+```sh
+extractexifgps help
+extractexifgps help csv
+extractexifgps help html
+```
+
+## Development
+
+### Testing
+
+A few Rake commands will help your testing:
+
+  - `rake test`: Run the test suite
+  - `rake lint`: Run the code linters
+  - `rake`: Run all tests and linters
+
+To facilitate development, consider running `guard` in the background while you
+work. Whenver a source file it changed, it will automatically run the relevent
+tests. This will provide you immediate test feedback at all times.
+
+### Documentation
+
+Generate code docs with:
+
+```sh
+rake doc
+```
+
+### Contributing to ExtractExifGps
 
   * Check out the latest master to make sure the feature hasn't been
     implemented or the bug hasn't been fixed yet.
@@ -30,7 +85,3 @@ extractexifgps /some/directory/ > images_in_some_directory.csv
   * Please try not to mess with the Rakefile, version, or history. If you want
     to have your own version, or is otherwise necessary, that is fine, but
     please isolate to its own commit so I can cherry-pick around it.
-
-## Copyright
-
-Copyright (c) 2018 Jon Sangster. See LICENSE.txt for further details.

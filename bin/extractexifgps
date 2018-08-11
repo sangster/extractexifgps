@@ -1,6 +1,3 @@
 #!/usr/bin/env ruby
-
 require 'extractexifgps'
-
-extractor = ExtractExifGps::DirectoryFilesExtractor.new(ARGV[0] || Dir.pwd)
-puts extractor.to_csv
+ExtractExifGps::Cli.start(ARGV)

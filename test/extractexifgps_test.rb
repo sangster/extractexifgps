@@ -1,8 +1,10 @@
 require 'helper'
 
-class TestExtractExifGps < UnitTest
-  def test_version
-    refute_nil ExtractExifGps::Version::MAJOR
-    refute_nil ExtractExifGps::Version::STRING
+module ExtractExifGps
+  class TestExtractExifGps < UnitTest
+    def test_version
+      refute_nil Version::MAJOR
+      refute_nil Version::STRING
+    end
   end
 end

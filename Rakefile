@@ -1,12 +1,10 @@
-# encoding: utf-8
-
 require 'rubygems'
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
+  $stderr.puts 'Run `bundle install` to install missing gems'
   exit e.status_code
 end
 
@@ -18,12 +16,12 @@ Jeweler::Tasks.new do |gem|
   gem.name = 'extractexifgps'
   gem.homepage = 'http://github.com/sangster/extractexifgps'
   gem.license = 'MIT'
-  gem.summary = %Q{Extracts EXIF GPS data from images}
-  gem.description = %Q{Extracts EXIF GPS data from images}
+  gem.summary = %(Extracts EXIF GPS data from images)
+  gem.description = %(Extracts EXIF GPS data from images)
   gem.email = 'jon@ertt.ca'
   gem.authors = ['Jon Sangster']
   gem.version = ExtractExifGps::Version::STRING
-  gem.executables = %W{extractexifgps}
+  gem.executables = %w[extractexifgps]
 end
 Jeweler::RubygemsDotOrgTasks.new
 
@@ -36,11 +34,9 @@ end
 
 desc 'Code coverage detail'
 task :simplecov do
-  ENV['COVERAGE'] = "true"
+  ENV['COVERAGE'] = 'true'
   Rake::Task['test'].execute
 end
-
-task :default => :test
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
@@ -51,3 +47,19 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+require 'yard'
+YARD::Rake::YardocTask.new do |t|
+  t.files = ['lib/**/*.rb']
+end
+
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new
+
+desc 'Run all linters'
+task lint: [:rubocop]
+
+desc 'Run all tests and linters'
+task check: %i[test rubocop]
+
+task default: :check
