@@ -60,6 +60,6 @@ desc 'Run all linters'
 task lint: [:rubocop]
 
 desc 'Run all tests and linters'
-task check: %i[test rubocop]
+task check: %i[test rubocop simplecov]
 
 task default: :check

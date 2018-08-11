@@ -1,5 +1,10 @@
 # ExtractExifGps
 
+[![Gem Version](https://badge.fury.io/rb/extractexifgps.svg)](https://badge.fury.io/rb/extractexifgps)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e5ff3fe936709bf32593/maintainability)](https://codeclimate.com/github/sangster/extractexifgps/maintainability)
+[![GitHub license](https://img.shields.io/github/license/sangster/extractexifgps.svg)](https://github.com/sangster/extractexifgps/blob/master/LICENSE.txt)
+
+
 `extractexifgps` is an application to extract EXIF GPS data from all the images
 in a given directory.
 
@@ -57,7 +62,8 @@ A few Rake commands will help your testing:
 
   - `rake test`: Run the test suite
   - `rake lint`: Run the code linters
-  - `rake`: Run all tests and linters
+  - `rake simplecov`: Run the code coverage reporter
+  - `rake`: Run all tests, linters, and code coverage reporters
 
 To facilitate development, consider running `guard` in the background while you
 work. Whenver a source file it changed, it will automatically run the relevent
