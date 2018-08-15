@@ -14,6 +14,7 @@ require './lib/extractexifgps.rb'
 
 Jeweler::Tasks.new do |gem|
   gem.name = 'extractexifgps'
+  gem.required_ruby_version = "~> #{IO.read '.ruby_version'}"
   gem.homepage = 'http://github.com/sangster/extractexifgps'
   gem.license = 'MIT'
   gem.summary = %(Extracts EXIF GPS data from images)
